@@ -1,6 +1,7 @@
 import tkinter as tk
 from PIL import Image, ImageTk
-from Comb_Calculator.Combinacion_no_repeticion import _nCr_
+from Comb_Calculator.Combinacion_no_repeticion import _nCr_, _nCr_Repeticion
+
 
 class Calculator(tk.Frame):
 
@@ -47,13 +48,17 @@ class Calculator(tk.Frame):
         self.Calcular.config(font=("Times New Roman", 24))
 
 
-        self.Combinacion_repeticion = tk.Button(self, text='Con Repeticion')
+        self.Combinacion_repeticion = tk.Button(self, text='Con Repeticion',
+                                command=lambda: _nCr_Repeticion(
+                                self, int(self._N.get()), int(self._R.get())
+                                ))
         self.Combinacion_repeticion.pack()
         self.Combinacion_repeticion.config(font=("Times New Roman", 24))
 
-        self.quit = tk.Button(self, text="QUIT", fg="red",
+        self.quit = tk.Button(self, text="Salir", fg="red",
             command=self.master.destroy)
         self.quit.pack(side="bottom")
+        self.quit.config(font=("Times New Roman", 24))
 
 
 
