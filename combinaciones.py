@@ -1,6 +1,6 @@
 import tkinter as tk
-from math import * #lIBRERIA PARA LAS COMBIANCIONES Y FACTORIALES
 from PIL import Image, ImageTk
+from Comb_Calculator.Combinacion_no_repeticion import _nCr_
 
 class Calculator(tk.Frame):
 
@@ -20,47 +20,41 @@ class Calculator(tk.Frame):
     #FUNCION EN LA QUE SE EJECUTA EL CODIGO
     def __main__(self):
         #ENTRADA DE N NUMEROS
+
         combinacion_entrada_etiqueta_N = tk.Label(self, text="Ingresa N elemento")
         combinacion_entrada_etiqueta_N.pack() # EL METODO PACK HACE QUE APAREZCA NUESTRO WIDGET
+        combinacion_entrada_etiqueta_N.config(font=("Times New Roman", 24))
 
         combinacion_entrada_N = tk.Entry(self, textvariable=self._N) #SE INGRESA DATOS CON ENTRY
         combinacion_entrada_N.pack()
+        combinacion_entrada_N.config(font=("Times New Roman", 24))
+
 
         #ENTRADA DE R NUMEROS
         combinacion_entrada_etiqueta_R = tk.Label(self, text="Ingresa R elemento")
         combinacion_entrada_etiqueta_R.pack()
+        combinacion_entrada_etiqueta_R.config(font=("Times New Roman", 24))
         combinacion_entrada_R = tk.Entry(self, textvariable=self._R)
         combinacion_entrada_R.pack()
+        combinacion_entrada_R.config(font=("Times New Roman", 24))
 
         #EN ESTE BOTON SE LLAMA A LA FUNCION DE COMBINACIONES, TIPO JAVASCRIPT
-        self.Calcular = tk.Button(self, text='Calcular',
-                                  command=lambda : self._nCr_(
-                                      int(self._N.get()), int(self._R.get())
+        self.Calcular = tk.Button(self, text='Sin Repeticion',
+                                  command=lambda: _nCr_(
+                                      self, int(self._N.get()), int(self._R.get())
                                   )) #FUNCION DE COMBINACIONES, PIDE PARAMETROS
         self.Calcular.pack()
+        self.Calcular.config(font=("Times New Roman", 24))
 
-    
+
+        self.Combinacion_repeticion = tk.Button(self, text='Con Repeticion')
+        self.Combinacion_repeticion.pack()
+        self.Combinacion_repeticion.config(font=("Times New Roman", 24))
+
         self.quit = tk.Button(self, text="QUIT", fg="red",
             command=self.master.destroy)
         self.quit.pack(side="bottom")
 
-    # FUNCION DE COMBINACIONES
-    def _nCr_(self, _n_, _r_ ):
-        try:
-            self._resultado = comb(_n_, _r_)
-            if self._resultado == 1:
-                self._resultado = factorial(_n_)
-                return self._resultado
-
-            else:
-                pass
-
-
-        except ImportError:
-            print('ALGO MALO HA OCURRIDO')
-
-        resultado_label = tk.Label(self, text=self._resultado) #MOSTRAMOS EL RESULTADO
-        resultado_label.pack()
 
 
 
